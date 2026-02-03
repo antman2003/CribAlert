@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>App Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light font-display text-gray-900 antialiased selection:bg-primary/30">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light">
+<header class="flex items-center justify-between p-4 sticky top-0 z-10 bg-background-light/95 backdrop-blur-sm">
+<div class="flex size-10 items-center justify-center rounded-full active:bg-gray-200 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-gray-900" style="font-size: 24px;">arrow_back</span>
+</div>
+<div class="flex flex-col items-center text-center">
+<h1 class="text-lg font-bold leading-tight text-gray-900">Settings</h1>
+<p class="text-[10px] font-medium text-gray-500 mt-0.5">Monitoring active · Camera connected · Alerts on</p>
+</div>
+<div class="flex size-10 items-center justify-center rounded-full opacity-0 pointer-events-none">
+<span class="material-symbols-outlined text-gray-900" style="font-size: 24px;">tune</span>
+</div>
+</header>
+<main class="flex-1 flex flex-col gap-6 p-4">
+<div class="rounded-3xl bg-white p-5 border border-gray-100 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 -mr-8 -mt-8 h-32 w-32 rounded-full bg-primary/5 blur-2xl group-hover:bg-primary/10 transition-all"></div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<h2 class="text-lg font-bold text-gray-900">Camera Calibration</h2>
+<p class="text-sm text-gray-500">Re-run setup to adjust camera placement or improve accuracy.</p>
+</div>
+<div class="rounded-full bg-gray-50 p-2 text-primary">
+<span class="material-symbols-outlined block">perm_device_information</span>
+</div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-bold text-gray-900 hover:bg-primary/90 active:scale-[0.98] transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" style="font-size: 20px;">build_circle</span>
+                        Run Camera Setup
+                    </button>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="ml-1 text-xs font-bold uppercase tracking-wider text-gray-500">Monitoring</h3>
+<div class="flex flex-col divide-y divide-gray-100 rounded-3xl bg-white border border-gray-100 shadow-sm">
+<div class="flex items-center justify-between gap-4 p-4">
+<div class="flex items-center gap-3">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600">
+<span class="material-symbols-outlined" style="font-size: 24px;">notifications_active</span>
+</div>
+<div class="flex flex-col">
+<h3 class="text-base font-bold text-gray-900">Safety Alerts</h3>
+<p class="text-xs text-gray-500 font-medium">You’ll still be able to view live video.</p>
+</div>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-7 w-12 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-6 after:w-6 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50"></div>
+</label>
+</div>
+<div class="flex items-center justify-between gap-4 p-4 cursor-pointer hover:bg-gray-50 transition-colors">
+<div class="flex items-center gap-3">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+<span class="material-symbols-outlined" style="font-size: 24px;">graphic_eq</span>
+</div>
+<div class="flex flex-col">
+<h3 class="text-base font-medium text-gray-900">Alert Preferences</h3>
+<p class="text-sm text-gray-500">Sound, volume, and alert behavior.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="ml-1 text-xs font-bold uppercase tracking-wider text-gray-500">Privacy &amp; Data</h3>
+<div class="rounded-3xl bg-white border border-gray-100 shadow-sm overflow-hidden">
+<details class="group">
+<summary class="flex items-center justify-between gap-4 p-4 cursor-pointer hover:bg-gray-50 transition-colors list-none [&amp;::-webkit-details-marker]:hidden">
+<div class="flex items-center gap-3">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+<span class="material-symbols-outlined" style="font-size: 24px;">security</span>
+</div>
+<div class="flex flex-col">
+<h3 class="text-base font-medium text-gray-900">Privacy &amp; Transparency</h3>
+<p class="text-sm text-gray-500">Data safety settings</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400 transition-transform duration-300 group-open:rotate-90">chevron_right</span>
+</summary>
+<div class="bg-gray-50/50 p-4 pt-2 pb-5 border-t border-gray-100 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-600" style="font-size: 20px;">memory</span>
+<span class="text-sm font-medium text-gray-700">100% On-Device Processing</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-600" style="font-size: 20px;">videocam_off</span>
+<span class="text-sm font-medium text-gray-700">No Video Recording</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-600" style="font-size: 20px;">cloud_off</span>
+<span class="text-sm font-medium text-gray-700">Local Analysis Only</span>
+</div>
+<div class="mt-2 pt-2 border-t border-gray-200/50">
+<a class="text-sm font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-1" href="#">
+                                    Full Privacy Policy
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+</a>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="ml-1 text-xs font-bold uppercase tracking-wider text-gray-500">Account</h3>
+<div class="rounded-3xl bg-white border border-gray-100 shadow-sm overflow-hidden">
+<div class="flex items-center justify-between gap-4 p-4 cursor-pointer hover:bg-gray-50 transition-colors">
+<div class="flex items-center gap-3">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+<span class="material-symbols-outlined" style="font-size: 24px;">account_circle</span>
+</div>
+<div class="flex flex-col">
+<h3 class="text-base font-medium text-gray-900">Sign in or create an account</h3>
+<p class="text-sm text-gray-500">Optional — unlock history, backups, and sharing.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="ml-1 text-xs font-bold uppercase tracking-wider text-gray-500">General</h3>
+<div class="flex flex-col divide-y divide-gray-100 rounded-3xl bg-white border border-gray-100 shadow-sm">
+<div class="flex items-center justify-between gap-4 p-4 cursor-pointer hover:bg-gray-50 transition-colors">
+<div class="flex items-center gap-3">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+<span class="material-symbols-outlined" style="font-size: 24px;">child_care</span>
+</div>
+<div class="flex flex-col">
+<h3 class="text-base font-medium text-gray-900">Baby Profile</h3>
+<p class="text-sm text-gray-500">Name, age, and sleep details.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400">chevron_right</span>
+</div>
+<div class="flex items-center justify-between gap-4 p-4 cursor-pointer hover:bg-gray-50 transition-colors">
+<div class="flex items-center gap-3">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600">
+<span class="material-symbols-outlined" style="font-size: 24px;">help</span>
+</div>
+<div class="flex flex-col">
+<h3 class="text-base font-medium text-gray-900">Help &amp; Support</h3>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400">chevron_right</span>
+</div>
+<div class="flex items-center justify-between gap-4 p-4 cursor-pointer hover:bg-gray-50 transition-colors">
+<div class="flex items-center gap-3">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-red-100 text-red-600">
+<span class="material-symbols-outlined" style="font-size: 24px;">logout</span>
+</div>
+<div class="flex flex-col">
+<h3 class="text-base font-medium text-red-600">Sign Out</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 text-center">
+<p class="text-xs text-gray-400">Version 2.4.0 (Build 1042)</p>
+</div>
+</main>
+<nav class="sticky bottom-0 z-20 border-t border-gray-200 bg-white/95 backdrop-blur-md pb-safe">
+<div class="flex justify-around items-center p-2">
+<button class="flex flex-col items-center gap-1 p-2 w-20 text-gray-400 hover:text-gray-600 transition-colors">
+<span class="material-symbols-outlined text-2xl">videocam</span>
+<span class="text-[10px] font-medium">Monitor</span>
+</button>
+<button class="flex flex-col items-center gap-1 p-2 w-20 text-gray-400 hover:text-gray-600 transition-colors">
+<span class="material-symbols-outlined text-2xl">bar_chart</span>
+<span class="text-[10px] font-medium">History</span>
+</button>
+<button class="flex flex-col items-center gap-1 p-2 w-20 text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</button>
+</div>
+</nav>
+</div>
+
+</body></html>

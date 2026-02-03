@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Safety Alert: Face Covered</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#22C55E",
+                        "amber-bg": "#FEF3C7", // Warm amber background
+                        "amber-card": "#FDE68A", // Slightly darker amber for cards/elements if needed
+                        "background-dark": "#1C1917", // Dark theme background
+                        "text-dark": "#451a03", // Dark amber text for contrast
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        "3xl": "1.5rem", // 24dp
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-amber-bg dark:bg-background-dark text-gray-900 dark:text-white font-sans antialiased min-h-screen flex flex-col p-6">
+<div class="w-full flex flex-col pt-12 pb-2">
+<div class="mb-14 text-center space-y-2">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 text-xs font-semibold uppercase tracking-wider">
+            Safety alert
+        </div>
+<h1 class="text-3xl font-bold text-gray-900 dark:text-white leading-tight">
+            Baby’s face may be covered
+        </h1>
+<p class="text-gray-600 dark:text-gray-300 px-4">
+            Please check the sleep area to make sure your baby’s face is clear.
+        </p>
+</div>
+<div class="w-full flex-none h-[240px] mb-20 relative">
+<div class="relative w-full h-full bg-gray-800 rounded-[1.5rem] overflow-hidden shadow-xl border border-orange-200/50 dark:border-gray-700 group">
+<div class="absolute inset-0 bg-gray-900 flex items-center justify-center overflow-hidden">
+<svg class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="20" id="pattern-sheet" patternTransform="rotate(45)" patternUnits="userSpaceOnUse" width="20">
+<line stroke="#E5E7EB" stroke-width="1" x1="0" x2="0" y1="0" y2="20"></line>
+</pattern>
+<filter height="140%" id="soft-shadow" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="4" flood-color="#000" flood-opacity="0.1" stdDeviation="4"></fedropshadow>
+</filter>
+<linearGradient id="skin-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#FCD5CE"></stop>
+<stop offset="100%" stop-color="#F8C0B5"></stop>
+</linearGradient>
+<radialGradient cx="50%" cy="50%" fx="50%" fy="50%" id="vignette" r="50%">
+<stop offset="70%" stop-color="#fff" stop-opacity="0"></stop>
+<stop offset="100%" stop-color="#000" stop-opacity="0.1"></stop>
+</radialGradient>
+</defs>
+<rect fill="#F9FAFB" height="300" width="400"></rect>
+<rect fill="url(#pattern-sheet)" height="300" opacity="0.5" width="400"></rect>
+<g transform="translate(200, 150)">
+<path d="M-60 50 C-60 20 -30 10 0 10 C30 10 60 20 60 50 L60 150 L-60 150 Z" fill="#FFFFFF"></path>
+<ellipse cx="0" cy="-20" fill="url(#skin-gradient)" rx="52" ry="58"></ellipse>
+<circle cx="-52" cy="-20" fill="#FCD5CE" r="8"></circle>
+<circle cx="52" cy="-20" fill="#FCD5CE" r="8"></circle>
+<path d="M-28 -20 Q-18 -15 -8 -20" fill="none" opacity="0.4" stroke="#7C2D12" stroke-linecap="round" stroke-width="2"></path>
+<path d="M8 -20 Q18 -15 28 -20" fill="none" opacity="0.4" stroke="#7C2D12" stroke-linecap="round" stroke-width="2"></path>
+<path d="M-4 -5 Q0 -2 4 -5" fill="none" opacity="0.4" stroke="#7C2D12" stroke-linecap="round" stroke-width="1.5"></path>
+</g>
+<path d="M0 300 
+                             L400 300 
+                             L400 180 
+                             Q320 180 260 110 
+                             Q220 70 180 110 
+                             Q140 150 100 190 
+                             Q50 240 0 250 Z" fill="#FDBA74" filter="url(#soft-shadow)"></path>
+<path d="M260 110 Q220 120 180 160" fill="none" opacity="0.2" stroke="#9A3412" stroke-linecap="round" stroke-width="2"></path>
+<rect fill="url(#vignette)" height="300" style="mix-blend-mode: multiply;" width="400"></rect>
+</svg>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+<div class="absolute top-4 left-4 flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+<span class="text-xs font-bold text-white tracking-wide">LIVE</span>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full space-y-3 pb-8">
+<button class="w-full py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-[1.5rem] font-bold text-lg shadow-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">videocam</span>
+        View live camera
+    </button>
+<button class="w-full py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-[1.5rem] font-bold text-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        I am checking
+    </button>
+<button class="w-full py-2 text-gray-500 dark:text-gray-400 font-semibold hover:text-gray-700 dark:hover:text-gray-200 transition-colors">
+        Mark as okay
+    </button>
+</div>
+
+</body></html>

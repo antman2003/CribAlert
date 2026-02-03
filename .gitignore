@@ -1,0 +1,90 @@
+# ===================
+# CribAlert .gitignore
+# ===================
+
+# Xcode build artifacts
+build/
+DerivedData/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# Xcode User Data (keep shared schemes)
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# CocoaPods (if used later)
+Pods/
+Podfile.lock
+
+# Carthage (if used later)
+Carthage/Build/
+Carthage/Checkouts/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+iOSInjectionProject/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE files
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+*.local
+
+# Archives and backups
+*.zip
+*.tar.gz
+*.rar
+
+# Ignore files folder (user-specific)
+Ignore files/
+
+# Logs
+*.log
+logs/
+
+# Test artifacts
+coverage/
+*.gcov
+*.gcda
+*.gcno
+
+# Provisioning profiles (sensitive)
+*.mobileprovision
+*.provisionprofile
+
+# Certificates (sensitive)
+*.cer
+*.p12
+*.key
+
+# Keep shared xcschemes
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/xcshareddata/xcschemes/

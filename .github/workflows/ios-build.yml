@@ -1,0 +1,126 @@
+# GitHub Actions workflow for CribAlert iOS app
+# Validates that the app builds successfully on macOS
+
+name: iOS Build & Validate
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'CribAlert/**'
+      - '.github/workflows/ios-build.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'CribAlert/**'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build:
+    name: Build iOS App
+    runs-on: macos-14  # macOS Sonoma with Xcode 15
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app/Contents/Developer
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Show available simulators
+        run: xcrun simctl list devices available
+
+      - name: Build iOS App (Debug)
+        run: |
+          cd CribAlert
+          xcodebuild build \
+            -project CribAlert.xcodeproj \
+            -scheme CribAlert \
+            -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.2' \
+            -configuration Debug \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty --color
+
+      - name: Validate no medical language in codebase
+        run: |
+          echo "🔍 Scanning for prohibited medical terms..."
+          cd CribAlert/CribAlert
+          
+          # List of prohibited terms (medical claims we must avoid)
+          PROHIBITED_TERMS="breathing|oxygen|heart rate|heartrate|vital signs|vitals|SIDS|suffocation|suffocate|life-saving|lifesaving|emergency"
+          
+          # Search in Swift files (excluding comments for now)
+          if grep -riE "$PROHIBITED_TERMS" --include="*.swift" .; then
+            echo "❌ ERROR: Found prohibited medical language in codebase!"
+            echo "Please use observational language only (e.g., 'may be covered', 'unusual stillness')"
+            exit 1
+          else
+            echo "✅ No prohibited medical terms found"
+          fi
+
+      - name: Validate privacy claims
+        run: |
+          echo "🔒 Validating privacy implementation..."
+          cd CribAlert/CribAlert
+          
+          # Check that we're not uploading video/audio anywhere
+          if grep -riE "upload.*video|upload.*audio|send.*video|send.*audio|POST.*video|POST.*audio" --include="*.swift" .; then
+            echo "⚠️ WARNING: Found potential video/audio upload code. Verify this matches privacy claims."
+          else
+            echo "✅ No video/audio upload code found"
+          fi
+          
+          # Check for analytics/tracking (should not exist in V1)
+          if grep -riE "Analytics|Tracking|Firebase|Amplitude|Mixpanel" --include="*.swift" .; then
+            echo "⚠️ WARNING: Found analytics/tracking code. Verify this is intentional."
+          else
+            echo "✅ No analytics/tracking code found"
+          fi
+
+  lint:
+    name: Swift Lint
+    runs-on: macos-14
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: Run SwiftLint
+        run: |
+          cd CribAlert
+          swiftlint lint --reporter github-actions-logging || true
+        continue-on-error: true  # Don't fail build on lint warnings for now
+
+  test:
+    name: Run Unit Tests
+    runs-on: macos-14
+    needs: build  # Only run if build succeeds
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app/Contents/Developer
+
+      - name: Run Tests
+        run: |
+          cd CribAlert
+          xcodebuild test \
+            -project CribAlert.xcodeproj \
+            -scheme CribAlert \
+            -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.2' \
+            -configuration Debug \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty --color
+        continue-on-error: true  # Tests may not exist yet

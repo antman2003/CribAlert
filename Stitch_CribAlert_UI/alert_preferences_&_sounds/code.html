@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alert Preferences</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1b2631",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem","full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            margin-top: -10px;cursor: pointer;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #dbe0e6;
+            border-radius: 2px;
+        }
+        .dark input[type=range]::-webkit-slider-thumb {
+            background: #2b8cee;
+        }
+        .dark input[type=range]::-webkit-slider-runnable-track {
+            background: #4a5568;
+        }.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display transition-colors duration-200">
+<div class="relative flex h-full min-h-screen w-full flex-col max-w-md mx-auto overflow-x-hidden shadow-lg bg-background-light dark:bg-background-dark">
+<div class="sticky top-0 z-50 flex items-center bg-surface-light dark:bg-surface-dark px-4 py-3 justify-between border-b border-border-light dark:border-border-dark">
+<button aria-label="Go back" class="flex size-10 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-primary">
+<span class="material-symbols-outlined" style="font-size: 24px;">arrow_back_ios_new</span>
+</button>
+<h1 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Alert Preferences</h1>
+<div class="size-10"></div> 
+</div>
+<div class="flex-1 overflow-y-auto pb-10">
+<div class="mt-6 px-4">
+<h3 class="text-gray-500 dark:text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 ml-4">Alert Sounds</h3>
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl overflow-hidden shadow-sm border border-border-light dark:border-border-dark">
+<div class="relative flex items-center p-4 border-b border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<label class="flex items-center gap-4 flex-1 cursor-pointer">
+<input checked="" class="h-5 w-5 border-2 border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0 bg-transparent cursor-pointer transition-all" name="sound_selection" type="radio"/>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="text-[#111418] dark:text-white text-base font-medium">Calm Chime</span>
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider rounded-full">Recommended</span>
+</div>
+<span class="text-gray-500 dark:text-gray-400 text-sm">Default tone</span>
+</div>
+</label>
+<button aria-label="Preview Calm Chime" class="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors ml-2">
+<span class="material-symbols-outlined fill-1" style="font-size: 20px;">play_arrow</span>
+</button>
+</div>
+<div class="relative flex items-center p-4 border-b border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<label class="flex items-center gap-4 flex-1 cursor-pointer">
+<input class="h-5 w-5 border-2 border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0 bg-transparent cursor-pointer transition-all" name="sound_selection" type="radio"/>
+<div class="flex flex-col">
+<span class="text-[#111418] dark:text-white text-base font-medium">Soft Melody</span>
+<span class="text-gray-500 dark:text-gray-400 text-sm">Gentle lullaby</span>
+</div>
+</label>
+<button aria-label="Preview Soft Melody" class="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors ml-2">
+<span class="material-symbols-outlined fill-1" style="font-size: 20px;">play_arrow</span>
+</button>
+</div>
+<div class="relative flex items-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<label class="flex items-center gap-4 flex-1 cursor-pointer">
+<input class="h-5 w-5 border-2 border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0 bg-transparent cursor-pointer transition-all" name="sound_selection" type="radio"/>
+<div class="flex flex-col">
+<span class="text-[#111418] dark:text-white text-base font-medium">Clear Pulse</span>
+<span class="text-gray-500 dark:text-gray-400 text-sm">Rhythmic pulse</span>
+</div>
+</label>
+<button aria-label="Preview Clear Pulse" class="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors ml-2">
+<span class="material-symbols-outlined fill-1" style="font-size: 20px;">play_arrow</span>
+</button>
+</div>
+</div>
+<p class="mt-2 ml-4 text-xs text-gray-500 dark:text-gray-400">Choose a sound that will wake you without causing stress.</p>
+</div>
+<div class="mt-6 px-4">
+<h3 class="text-gray-500 dark:text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 ml-4">Volume</h3>
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl p-4 shadow-sm border border-border-light dark:border-border-dark">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[#111418] dark:text-white font-medium">Alert Volume</span>
+<span class="text-gray-500 dark:text-gray-400 text-sm font-medium">75%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500" style="font-size: 20px;">volume_mute</span>
+<div class="relative w-full h-6 flex items-center">
+<div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full relative">
+<div class="bg-primary h-1.5 rounded-full absolute left-0 top-0" style="width: 75%;"></div>
+<div class="h-5 w-5 bg-white dark:bg-primary rounded-full shadow-md border border-gray-200 dark:border-none absolute top-1/2 -translate-y-1/2 -ml-2.5 cursor-pointer hover:scale-110 transition-transform" style="left: 75%;"></div>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500" style="font-size: 20px;">volume_up</span>
+</div>
+</div>
+<p class="mt-2 ml-4 text-xs text-gray-500 dark:text-gray-400">Test this volume with your phone locked.</p>
+</div>
+<div class="mt-6 px-4">
+<h3 class="text-gray-500 dark:text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 ml-4">Critical Safety</h3>
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl shadow-sm border border-border-light dark:border-border-dark overflow-hidden">
+<div class="p-4 flex items-center justify-between">
+<div class="flex flex-col gap-1 pr-4">
+<span class="text-[#111418] dark:text-white text-base font-medium">Override Silent Mode</span>
+<span class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">
+                                Settings that help ensure alerts aren’t missed.
+                            </span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-12 h-7 bg-gray-200 dark:bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-primary shadow-inner"></div>
+</label>
+</div>
+<div class="bg-blue-50 dark:bg-blue-900/20 px-4 py-3 border-t border-blue-100 dark:border-blue-800/30 flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5" style="font-size: 18px;">info</span>
+<p class="text-primary text-xs font-medium leading-normal">
+                            We recommend keeping this enabled to ensure you never miss a safety notification.
+                        </p>
+</div>
+</div>
+</div>
+<div class="mt-6 px-4 mb-8">
+<h3 class="text-gray-500 dark:text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 ml-4">Vibration Pattern</h3>
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl overflow-hidden shadow-sm border border-border-light dark:border-border-dark">
+<label class="relative flex items-center p-4 border-b border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined" style="font-size: 18px;">favorite</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[#111418] dark:text-white text-base font-medium">Heartbeat</span>
+<span class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Gentle repeating vibration</span>
+</div>
+</div>
+<input checked="" class="h-5 w-5 border-2 border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0 bg-transparent cursor-pointer" name="vibration_selection" type="radio"/>
+</label>
+<label class="relative flex items-center p-4 border-b border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined" style="font-size: 18px;">sos</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[#111418] dark:text-white text-base font-medium">SOS</span>
+<span class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Short, attention-grabbing pulses</span>
+</div>
+</div>
+<input class="h-5 w-5 border-2 border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0 bg-transparent cursor-pointer" name="vibration_selection" type="radio"/>
+</label>
+<label class="relative flex items-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined" style="font-size: 18px;">vibration</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[#111418] dark:text-white text-base font-medium">Continuous</span>
+<span class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Strong vibration until dismissed</span>
+</div>
+</div>
+<input class="h-5 w-5 border-2 border-gray-300 dark:border-gray-600 text-primary focus:ring-primary focus:ring-offset-0 bg-transparent cursor-pointer" name="vibration_selection" type="radio"/>
+</label>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

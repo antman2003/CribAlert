@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Baby Profile - CribAlert</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>.material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }html {
+            scroll-behavior: smooth;
+        }::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark min-h-screen text-[#111811] dark:text-white overflow-x-hidden selection:bg-primary/30">
+<div class="relative flex flex-col h-full min-h-screen max-w-md mx-auto bg-white dark:bg-black/20 shadow-xl overflow-hidden">
+<header class="flex items-center justify-between px-4 py-3 bg-white dark:bg-background-dark/95 backdrop-blur-md sticky top-0 z-50">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-900 dark:text-white">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold leading-tight tracking-tight text-gray-900 dark:text-white">Baby Profile</h1>
+<div class="size-10"></div> 
+</header>
+<main class="flex-1 px-5 pt-2 pb-24 overflow-y-auto">
+<div class="flex flex-col items-center justify-center py-6">
+<div class="relative group cursor-pointer">
+<div class="size-24 rounded-full bg-primary/10 flex items-center justify-center border-2 border-dashed border-primary/30 hover:border-primary transition-colors overflow-hidden">
+<span class="material-symbols-outlined text-primary text-4xl">add_a_photo</span>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary text-black rounded-full p-1.5 shadow-sm border-2 border-white dark:border-background-dark flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">edit</span>
+</div>
+</div>
+<p class="mt-3 text-sm font-medium text-primary">Add photo</p>
+<p class="mt-1 text-xs text-gray-400 dark:text-gray-500">Optional — used only for personalization.</p>
+</div>
+<div class="space-y-6 mt-2">
+<div class="flex flex-col gap-2">
+<label class="text-base font-semibold text-gray-900 dark:text-gray-100" for="baby-name">
+                        Baby’s name
+                    </label>
+<div class="relative">
+<input class="w-full h-14 pl-4 pr-4 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-gray-700 rounded-xl text-base text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm" id="baby-name" placeholder="Enter baby's name" type="text"/>
+</div>
+<p class="text-sm text-gray-500 dark:text-gray-400 font-normal leading-relaxed">
+                        This is how we’ll refer to your baby in the app.
+                    </p>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-base font-semibold text-gray-900 dark:text-gray-100 flex items-center justify-between" for="location-name">
+                        Sleep location
+                        <span class="text-xs font-normal text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">Optional</span>
+</label>
+<div class="relative">
+<input class="w-full h-14 pl-4 pr-4 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-gray-700 rounded-xl text-base text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm" id="location-name" placeholder="e.g. Nursery or Bedroom" type="text"/>
+</div>
+</div>
+</div>
+</main>
+<div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-white via-white to-transparent dark:from-background-dark dark:via-background-dark pb-8">
+<div class="text-center mb-4">
+<p class="text-xs text-gray-400 dark:text-gray-500 font-medium">
+                    You can change this anytime.
+                </p>
+<p class="text-xs text-gray-400 dark:text-gray-500 font-medium mt-1">
+                    Profile details don’t affect monitoring or alerts.
+                </p>
+</div>
+<button class="w-full h-14 bg-primary hover:bg-[#0fd60f] active:scale-[0.98] transition-all rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center text-black font-bold text-lg tracking-tight">
+                Save
+            </button>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,84 @@
+# SwiftLint configuration for CribAlert
+# https://github.com/realm/SwiftLint
+
+# Paths to include
+included:
+  - CribAlert
+
+# Paths to exclude
+excluded:
+  - CribAlert.xcodeproj
+  - build
+  - DerivedData
+  - Pods
+
+# Rules configuration
+disabled_rules:
+  - trailing_whitespace  # Can be noisy during development
+  - line_length  # Will enable later with custom limit
+
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - private_outlet
+  - private_action
+
+# Custom rule configurations
+force_cast:
+  severity: warning
+
+force_try:
+  severity: warning
+
+force_unwrapping:
+  severity: warning
+
+identifier_name:
+  min_length: 2
+  max_length: 50
+  excluded:
+    - id
+    - x
+    - y
+    - i
+    - j
+    - to
+
+type_name:
+  min_length: 3
+  max_length: 50
+
+file_length:
+  warning: 500
+  error: 1000
+
+function_body_length:
+  warning: 50
+  error: 100
+
+type_body_length:
+  warning: 300
+  error: 500
+
+# Custom rules for CribAlert-specific requirements
+custom_rules:
+  # Prevent medical language in user-facing strings
+  no_medical_terms:
+    name: "No Medical Terms"
+    regex: '(breathing|oxygen|heart\s*rate|vital\s*signs|SIDS|suffocation|life-saving|emergency)'
+    message: "Avoid medical terminology. Use observational language instead."
+    severity: error
+    match_kinds:
+      - string
+  
+  # Ensure privacy-first approach
+  no_upload_keywords:
+    name: "No Upload Keywords"
+    regex: '(upload.*video|upload.*audio|send.*recording)'
+    message: "Video/audio should not be uploaded. Verify this matches privacy claims."
+    severity: warning
+    match_kinds:
+      - string
+      - comment

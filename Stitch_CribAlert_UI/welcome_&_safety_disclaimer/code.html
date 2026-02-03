@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CribAlert - Welcome</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>.checkbox-round {
+            appearance: none;
+            background-color: transparent;
+            margin: 0;
+            font: inherit;
+            color: currentColor;
+            width: 1.5em;
+            height: 1.5em;
+            border: 2px solid #d1d5db;border-radius: 50%;
+            display: grid;
+            place-content: center;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .checkbox-round::before {
+            content: "";
+            width: 0.75em;
+            height: 0.75em;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em white;
+            transform-origin: center;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+        .checkbox-round:checked {
+            background-color: #2b8cee;border-color: #2b8cee;
+        }
+        .checkbox-round:checked::before {
+            transform: scale(1);
+        }
+        .checkbox-round:focus {
+            outline: 2px solid #2b8cee;
+            outline-offset: 2px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-white dark:bg-background-dark text-[#111418] dark:text-white font-display antialiased overflow-x-hidden">
+<div class="relative flex h-full min-h-screen w-full flex-col">
+<div class="flex items-center p-4 pb-2 justify-between shrink-0">
+<div class="flex items-center gap-2">
+<div class="bg-primary/10 rounded-full p-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-size: 24px;">videocam</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">CribAlert</h2>
+</div>
+</div>
+<div class="flex-1 flex flex-col px-4 pt-4 pb-8 overflow-y-auto">
+<div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-8 shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Soft photo of a peaceful baby sleeping in a white crib" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBFy--m8pVlUj-cw7Nv5ajr3fnlDSQoxhHvzjvP1rWAp0du5ZIu1w8V87XMRC6tWUqk0SI5SbYTYce9XCzPPm6mepAlYzINtlEOiLdirUql_SwDvPgxgrR3ooE6nTKaFUOOz8ZLcHJPNaoj2uP7OAyMKyItZ0daFcgB140Y1FU4CYx389zPtWJcY6I3rjrz_1VJuDTyeMVmM85HUqHgVrfKtr3CByjNNwnJcSx-2C8imhm7sW7i9EzkHw9tqMGoNZoc4loO3oe6zqR9');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent dark:from-background-dark/20"></div>
+</div>
+<div class="flex flex-col items-center text-center mb-8">
+<h1 class="text-3xl font-bold leading-tight mb-3">Welcome to CribAlert</h1>
+<p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-relaxed max-w-xs">
+                    Let's help everyone get a better night's rest with smart monitoring.
+                </p>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/10 rounded-2xl p-5 mb-6">
+<div class="flex items-start gap-4">
+<div class="bg-primary/20 text-primary rounded-full p-2 shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined filled">security</span>
+</div>
+<div class="flex-1">
+<h3 class="text-primary font-bold text-lg mb-1">Safety First</h3>
+<p class="text-[#111418] dark:text-gray-200 text-sm font-medium leading-relaxed opacity-90">
+                            Important: This is not a medical device. It does not monitor vital signs or prevent SIDS. Always follow safe sleep guidelines.
+                        </p>
+</div>
+</div>
+</div>
+<div class="mt-auto">
+<label class="flex gap-x-4 items-center p-2 cursor-pointer group select-none">
+<input class="checkbox-round shrink-0" type="checkbox"/>
+<span class="text-[#111418] dark:text-white text-sm font-medium leading-normal group-hover:text-primary transition-colors">
+                        I understand this is a safety aid, not a medical device.
+                    </span>
+</label>
+</div>
+</div>
+<div class="p-4 pb-8 bg-white dark:bg-background-dark shrink-0">
+<button class="w-full bg-primary hover:bg-blue-600 text-white font-bold text-lg h-14 rounded-full flex items-center justify-center transition-all shadow-lg shadow-blue-200 dark:shadow-none mb-8 active:scale-[0.98]">
+                Start Setup
+            </button>
+<div class="flex items-center justify-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+</div>
+</div>
+</div>
+</body></html>

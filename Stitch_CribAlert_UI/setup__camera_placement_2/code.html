@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Step 2: Mount Device</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "primary-foreground": "#102216",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "surface-dark": "#1c2e22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        min-height: max(884px, 100dvh);
+    }
+</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light text-slate-900 antialiased transition-colors duration-200">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-hidden max-w-md mx-auto shadow-2xl bg-background-light">
+<header class="flex items-center justify-between p-4 pt-6 z-10">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-black/5 transition-colors">
+<span class="material-symbols-outlined text-slate-900" style="font-size: 24px;">arrow_back</span>
+</button>
+<h1 class="text-base font-bold tracking-wide text-slate-500">Step 2 of 4</h1>
+<button class="flex h-10 items-center justify-center px-2 rounded-full hover:bg-black/5 transition-colors">
+<span class="text-sm font-semibold text-slate-500">Skip</span>
+</button>
+</header>
+<div class="px-6 pb-2 w-full">
+<div class="w-full h-1.5 rounded-full bg-slate-200 overflow-hidden">
+<div class="h-full w-1/2 bg-primary shadow-[0_0_10px_rgba(19,236,91,0.5)] rounded-full"></div>
+</div>
+</div>
+<main class="flex-1 flex flex-col items-center justify-center w-full relative z-0">
+<div class="w-full px-6 py-4 flex flex-col items-center justify-center flex-1 min-h-[300px]">
+<div class="relative w-full aspect-[4/5] max-h-[400px] rounded-2xl overflow-hidden bg-gradient-to-b from-slate-100 to-white shadow-inner border border-slate-200 flex items-center justify-center">
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#13ec5b 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="w-4/5 h-4/5 bg-contain bg-center bg-no-repeat relative z-10" data-alt="Illustration of phone mounted above a baby crib" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6C4L7C8lzTDs8qPZ3FcPbhJsWBRN1m-fPY-0FAvAeAdkUvVG7qa3rtjhwY0RqSTX5ey-4gQqLIQk_I8Kv3bFKrG_nN5FVCwogw_9egugczHp50va1muDTzCT191yqHh17bY8hzdcz3PDusdskJhCsr0-zrp5nEMte2XAs3DlscEKlq1av2u6nhVH7hE8GA9oRMoNgsW27SfSFiet0ciXcE6dDY9ZxZheU_ihHN9_JKaRB57lKQOPx8obFrmX30iBKbXkz1CDdXFuF'); opacity: 0.9; mask-image: linear-gradient(to bottom, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);">
+<div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+</div>
+<div class="absolute top-[20%] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[60px] border-r-[60px] border-b-[200px] border-l-transparent border-r-transparent border-b-primary/10 blur-sm pointer-events-none"></div>
+<div class="absolute top-[45%] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+<div class="h-12 w-0.5 border-l border-dashed border-primary/60"></div>
+<span class="text-[10px] font-bold text-primary bg-black/40 px-2 py-0.5 rounded-full backdrop-blur-sm border border-primary/30">3-4 ft</span>
+<div class="h-12 w-0.5 border-l border-dashed border-primary/60"></div>
+</div>
+</div>
+</div>
+<div class="w-full px-6 pb-6 text-center">
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 mb-3">
+                Mount your device
+            </h2>
+<p class="text-base font-normal leading-relaxed text-slate-600 max-w-xs mx-auto">
+                For best results, place your camera 3-4 feet directly above the crib with a clear, top-down view.
+            </p>
+<button class="mt-4 flex items-center justify-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors mx-auto group">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<span class="border-b border-transparent group-hover:border-primary/50">Don't have a mount?</span>
+</button>
+</div>
+</main>
+<div class="p-6 pt-0 mt-auto w-full bg-gradient-to-t from-background-light via-background-light to-transparent pb-8">
+<button class="w-full h-14 bg-primary hover:bg-primary/90 active:scale-[0.98] rounded-xl flex items-center justify-center gap-2 transition-all shadow-[0_4px_20px_rgba(19,236,91,0.25)] group">
+<span class="text-white text-lg font-bold">Next</span>
+<span class="material-symbols-outlined text-white transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+
+</body></html>

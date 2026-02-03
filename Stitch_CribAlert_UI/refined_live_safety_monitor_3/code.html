@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Safety Alert: Unusual Stillness Detected</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#22C55E", 
+                        "background-light": "#FDFBF7", // Soft cream/neutral
+                        "alert-text": "#1F2937",
+                        "soft-amber": "#FEF3C7",
+                        "soft-amber-text": "#92400E",
+                        "neutral-button": "#F3F4F6",
+                        "neutral-button-text": "#374151",
+                        "primary-button": "#1F2937", // Dark neutral for gentle contrast
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            min-height: max(844px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light text-gray-900 font-sans antialiased h-screen flex flex-col items-center justify-between p-6">
+<main class="w-full flex-1 flex flex-col items-center pt-8 max-w-sm mx-auto">
+<div class="text-center space-y-3 mb-8">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 bg-soft-amber rounded-full mb-2">
+<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+<span class="text-xs font-semibold text-soft-amber-text uppercase tracking-wide">Monitoring movement</span>
+</div>
+<h1 class="text-2xl font-bold text-gray-900 leading-tight">
+            Unusual Stillness Detected
+        </h1>
+<p class="text-gray-500 text-sm leading-relaxed px-2">
+            We haven’t seen normal movement for a while. This can happen during deep sleep. Please take a moment to check your baby.
+        </p>
+</div>
+<div class="w-full relative aspect-[4/3] bg-gray-100 rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 mb-6">
+<img alt="Baby sleeping on back in crib camera feed" class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo2xVw9KvH--ZH-14AuM8SxQhAQVcbdHUkHqeTr4SqqRUrnXgegPWIoYKJkCddlf0a6RI6Sx7IeYMmMOW48pAVlStYvoEvDn39crNI5Lv_S4HhCAZwNUIsXK-3nduS-w0Xhhumz8OIh4P93EXqkE1mVke3SjGtHGFtnJYcPp2G4vzYceqGe8EiiosKaBj14-Ejr9mH3bNz1mj0tRqNsYGwLV717vrhiFVFX2hC7qTc-c1hOYPtjJwqHvIYulV12ccZ9m6v8PuOSh70"/>
+<div class="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/30"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<div class="bg-black/20 backdrop-blur-md text-white text-[10px] font-medium px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-icons-round text-[12px]">videocam</span>
+                Live
+            </div>
+</div>
+<div class="absolute bottom-4 right-4 flex gap-3">
+<div class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
+<span class="material-icons-round text-white text-sm">mic_off</span>
+</div>
+</div>
+</div>
+<div class="w-full space-y-3 pb-6 flex-1 flex flex-col justify-start">
+<button class="w-full bg-primary-button text-white font-semibold py-4 rounded-xl shadow-sm active:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+<span class="material-icons-round text-lg">videocam</span>
+            View live camera
+        </button>
+<button class="w-full bg-white border border-gray-200 text-gray-700 font-semibold py-4 rounded-xl shadow-sm active:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+<span class="material-icons-round text-lg">check</span>
+             I am checking
+        </button>
+<button class="w-full text-gray-400 font-medium py-2 text-sm hover:text-gray-600 transition-colors">
+            Dismiss
+        </button>
+</div>
+</main>
+</body></html>

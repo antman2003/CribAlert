@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Safety Alert: Crying Detected</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "24": "24px", 
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    .wave-bar {
+        animation: wave 1.2s ease-in-out infinite;
+    }
+    @keyframes wave {
+        0%, 100% { height: 16px; opacity: 0.5; }
+        50% { height: 40px; opacity: 1; }
+    }
+    .wave-bar:nth-child(1) { animation-delay: 0.1s; height: 16px; }
+    .wave-bar:nth-child(2) { animation-delay: 0.2s; height: 24px; }
+    .wave-bar:nth-child(3) { animation-delay: 0.3s; height: 40px; }
+    .wave-bar:nth-child(4) { animation-delay: 0.4s; height: 56px; }
+    .wave-bar:nth-child(5) { animation-delay: 0.5s; height: 32px; }
+    .wave-bar:nth-child(6) { animation-delay: 0.4s; height: 48px; }
+    .wave-bar:nth-child(7) { animation-delay: 0.3s; height: 20px; }
+    .wave-bar:nth-child(8) { animation-delay: 0.2s; height: 12px; }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#111418] dark:text-white overflow-x-hidden antialiased">
+<div class="relative flex h-full min-h-screen w-full flex-col justify-between bg-gradient-to-b from-white via-blue-50/50 to-blue-100/30 dark:from-background-dark dark:via-background-dark dark:to-primary/10">
+<div class="flex flex-1 flex-col items-center pt-16 px-6 w-full max-w-md mx-auto">
+<div class="w-full flex flex-col items-center justify-center my-8 min-h-[160px]">
+<div aria-label="Audio waveform visualization" class="flex items-center justify-center gap-1.5 h-20 w-full">
+<div class="wave-bar w-1.5 bg-primary rounded-full"></div>
+<div class="wave-bar w-1.5 bg-primary rounded-full"></div>
+<div class="wave-bar w-1.5 bg-primary rounded-full"></div>
+<div class="wave-bar w-1.5 bg-primary rounded-full"></div>
+<div class="wave-bar w-1.5 bg-primary rounded-full"></div>
+<div class="wave-bar w-1.5 bg-primary rounded-full"></div>
+<div class="wave-bar w-1.5 bg-primary rounded-full"></div>
+<div class="wave-bar w-1.5 bg-primary rounded-full"></div>
+</div>
+<div class="mt-6 flex items-center gap-2 px-4 py-1.5 bg-blue-100/50 dark:bg-primary/20 rounded-full">
+<span class="material-symbols-outlined text-primary text-[18px]">graphic_eq</span>
+<span class="text-primary text-sm font-bold tracking-tight">Listening for sounds</span>
+</div>
+</div>
+<div class="text-center space-y-3 mt-4">
+<h1 class="text-[32px] font-extrabold tracking-tight text-[#111418] dark:text-white leading-tight">
+                Crying Detected
+            </h1>
+<p class="text-[17px] font-medium text-slate-500 dark:text-slate-400 leading-relaxed max-w-[280px] mx-auto">
+                Your baby sounds upset and may need you.
+            </p>
+</div>
+</div>
+<div class="w-full max-w-md mx-auto px-6 pb-28 pt-4">
+<div class="flex flex-col gap-3">
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-[24px] h-14 px-6 bg-primary hover:bg-primary/90 transition-colors text-white text-[17px] font-bold tracking-wide shadow-lg shadow-blue-200/50 dark:shadow-none">
+<span class="truncate">Open live view</span>
+</button>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-[24px] h-14 px-6 bg-[#E8F1FA] dark:bg-slate-800 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors text-primary dark:text-blue-400 text-[17px] font-bold tracking-wide">
+<span class="truncate">Mute for 5 minutes</span>
+</button>
+<button class="flex w-full cursor-pointer items-center justify-center rounded-[24px] h-12 px-6 bg-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-[15px] font-bold tracking-wide mt-2">
+<span class="truncate underline decoration-2 decoration-transparent hover:decoration-slate-300 underline-offset-4 transition-all">Dismiss</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>
