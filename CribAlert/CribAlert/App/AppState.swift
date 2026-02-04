@@ -31,8 +31,8 @@ final class AppState: ObservableObject {
     
     // MARK: - Monitoring State
     
-    /// Current monitoring status
-    @Published var monitoringState: MonitoringState = .inactive
+    /// Current monitoring status (UI level)
+    @Published var monitoringState: AppMonitoringState = .inactive
     
     /// Whether safety alerts are enabled
     @AppStorage("safetyAlertsEnabled") var safetyAlertsEnabled: Bool = true
@@ -85,65 +85,6 @@ final class AppState: ObservableObject {
 }
 
 // MARK: - Monitoring State Enum
-
-/// Represents the current state of the monitoring system
-enum MonitoringState: Equatable {
-    /// Monitoring is not active
-    case inactive
-    
-    /// Monitoring is active and running normally
-    case active
-    
-    /// Monitoring is paused due to an issue
-    case paused(reason: PausedReason)
-    
-    /// A safety alert is currently being displayed
-    case alerting(alertType: AlertType)
-}
-
-/// Reasons why monitoring might be paused
-enum PausedReason: String, Equatable {
-    case cameraDisconnected = "The camera is not connected right now."
-    case appBackgrounded = "The app is running in the background."
-    case lowBattery = "Battery is too low for monitoring."
-    case thermalThrottling = "Device is too warm. Monitoring paused to cool down."
-    case permissionDenied = "Camera permission is required for monitoring."
-}
-
-/// Types of safety alerts that can be triggered
-enum AlertType: String, Equatable {
-    case rolledOntoStomach = "Baby rolled onto stomach"
-    case faceMayCovered = "Baby's face may be covered"
-    case unusualStillness = "Unusual stillness detected"
-    case cryingDetected = "Crying detected"
-    
-    /// Severity level of the alert
-    var severity: AlertSeverity {
-        switch self {
-        case .rolledOntoStomach, .faceMayCovered:
-            return .high
-        case .unusualStillness, .cryingDetected:
-            return .medium
-        }
-    }
-    
-    /// Description text shown on the alert
-    var description: String {
-        switch self {
-        case .rolledOntoStomach:
-            return "Please check your baby"
-        case .faceMayCovered:
-            return "Please check the sleep area to make sure your baby's face is clear."
-        case .unusualStillness:
-            return "We haven't seen normal movement for a while. This can happen during deep sleep. Please take a moment to check your baby."
-        case .cryingDetected:
-            return "Your baby sounds upset and may need you."
-        }
-    }
-}
-
-/// Alert severity levels
-enum AlertSeverity {
-    case high
-    case medium
-}
+// Note: AlertType, AlertSeverity, and PausedReason are defined in Models/AlertTypes.swift
+// Note: MonitoringState (for service) is defined in Services/MonitoringService.swift
+// Note: MovementStatus and PositionStatus are defined in Models/StatusTypes.swift

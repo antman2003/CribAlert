@@ -125,25 +125,62 @@ class MovementDetectionService: ObservableObject {
         // This gives a rough measure of how much the frame changed
         
         let context = CIContext()
-        var avgIntensity: Float = 0
         
-        // Sample a small area for performance
+        // Sample a small area for performance (center of frame)
+        let centerX = outputImage.extent.midX
+        let centerY = outputImage.extent.midY
+        let sampleSize: CGFloat = 100
+        
         let sampleExtent = CGRect(
-            x: outputImage.extent.midX - 50,
-            y: outputImage.extent.midY - 50,
-            width: 100,
-            height: 100
+            x: max(0, centerX - sampleSize / 2),
+            y: max(0, centerY - sampleSize / 2),
+            width: min(sampleSize, outputImage.extent.width),
+            height: min(sampleSize, outputImage.extent.height)
         )
         
-        if let cgImage = context.createCGImage(outputImage, from: sampleExtent) {
-            // Calculate average pixel intensity
-            let width = cgImage.width
-            let height = cgImage.height
-            let totalPixels = width * height
-            
-            // Simplified intensity calculation
-            avgIntensity = Float(totalPixels > 0 ? 0.05 : 0) // Placeholder
+        guard sampleExtent.width > 0, sampleExtent.height > 0,
+              let cgImage = context.createCGImage(outputImage, from: sampleExtent) else {
+            return 0
         }
+        
+        // Calculate actual average pixel intensity from the difference image
+        let width = cgImage.width
+        let height = cgImage.height
+        let totalPixels = width * height
+        
+        guard totalPixels > 0,
+              let dataProvider = cgImage.dataProvider,
+              let data = dataProvider.data,
+              let bytes = CFDataGetBytePtr(data) else {
+            return 0
+        }
+        
+        let bytesPerPixel = cgImage.bitsPerPixel / 8
+        let bytesPerRow = cgImage.bytesPerRow
+        
+        var totalIntensity: Float = 0
+        
+        // Sample every 4th pixel for performance
+        for y in stride(from: 0, to: height, by: 4) {
+            for x in stride(from: 0, to: width, by: 4) {
+                let offset = y * bytesPerRow + x * bytesPerPixel
+                
+                // Average RGB channels (assuming BGRA format)
+                let blue = Float(bytes[offset])
+                let green = Float(bytes[offset + 1])
+                let red = Float(bytes[offset + 2])
+                
+                // Normalize to 0-1 range
+                let pixelIntensity = (red + green + blue) / (3.0 * 255.0)
+                totalIntensity += pixelIntensity
+            }
+        }
+        
+        // Calculate sampled pixel count
+        let sampledPixels = (width / 4) * (height / 4)
+        guard sampledPixels > 0 else { return 0 }
+        
+        let avgIntensity = totalIntensity / Float(sampledPixels)
         
         return avgIntensity
     }

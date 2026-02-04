@@ -50,26 +50,39 @@ class CryingDetectionService: NSObject, ObservableObject {
     
     // MARK: - Lifecycle
     
+    /// Flag to prevent multiple start operations
+    private var isStarting: Bool = false
+    
     func start() {
-        guard !isRunning else { return }
+        guard !isRunning, !isStarting else { return }
+        isStarting = true
         
         // Check for custom model
-        Task { @MainActor in
+        Task { @MainActor [weak self] in
+            guard let self = self, self.isStarting else { return }
+            
             let modelManager = MLModelManager.shared
             
             if modelManager.cryingModelAvailable, let model = modelManager.cryingModel {
-                setupWithCustomModel(model)
-                usingCustomModel = true
+                self.setupWithCustomModel(model)
+                self.usingCustomModel = true
                 print("🎤 CryingDetectionService: Using custom BabyCryingClassifier model")
             } else {
-                setupWithFallback()
-                usingCustomModel = false
+                self.setupWithFallback()
+                self.usingCustomModel = false
                 print("🎤 CryingDetectionService: Using audio analysis fallback")
             }
+            
+            self.isStarting = false
         }
     }
     
     func stop() {
+        isStarting = false
+        
+        // Remove audio tap before stopping engine
+        inputNode?.removeTap(onBus: 0)
+        
         audioEngine?.stop()
         audioEngine = nil
         inputNode = nil

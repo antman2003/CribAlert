@@ -367,66 +367,7 @@ enum ActivityType {
     }
 }
 
-enum MovementStatus {
-    case still
-    case moving
-    case unusual
-    
-    var displayValue: String {
-        switch self {
-        case .still: return "Still"
-        case .moving: return "Moving"
-        case .unusual: return "Unusual"
-        }
-    }
-    
-    var subtitle: String {
-        switch self {
-        case .still: return "Looks normal"
-        case .moving: return "Active movement"
-        case .unusual: return "Check on baby"
-        }
-    }
-    
-    var isNormal: Bool {
-        switch self {
-        case .still, .moving: return true
-        case .unusual: return false
-        }
-    }
-}
-
-enum PositionStatus {
-    case onBack
-    case onSide
-    case onStomach
-    case unknown
-    
-    var displayValue: String {
-        switch self {
-        case .onBack: return "On Back"
-        case .onSide: return "On Side"
-        case .onStomach: return "On Stomach"
-        case .unknown: return "Unknown"
-        }
-    }
-    
-    var subtitle: String {
-        switch self {
-        case .onBack: return "Recommended sleep position"
-        case .onSide: return "Side position detected"
-        case .onStomach: return "Check on baby"
-        case .unknown: return "Unable to detect"
-        }
-    }
-    
-    var isNormal: Bool {
-        switch self {
-        case .onBack, .onSide: return true
-        case .onStomach, .unknown: return false
-        }
-    }
-}
+// MovementStatus and PositionStatus are defined in Models/StatusTypes.swift
 
 // MARK: - Preview
 

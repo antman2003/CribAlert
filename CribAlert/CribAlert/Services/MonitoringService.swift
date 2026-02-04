@@ -23,7 +23,7 @@ class MonitoringService: ObservableObject {
     // MARK: - Published State
     
     @Published var isMonitoring: Bool = false
-    @Published var monitoringState: MonitoringState = .idle
+    @Published var monitoringState: ServiceMonitoringState = .idle
     @Published var currentPosition: PositionStatus = .onBack
     @Published var currentMovement: MovementStatus = .still
     @Published var lastAlertType: AlertType?
@@ -236,23 +236,24 @@ struct DetectionCapabilities {
     }
 }
 
-// MARK: - Monitoring State
+// MARK: - Service Monitoring State
 
-enum MonitoringState: Equatable {
+/// Service-level monitoring state (internal to MonitoringService)
+enum ServiceMonitoringState: Equatable {
     case idle
     case active
     case paused(PausedReason)
     case permissionDenied
     case cameraUnavailable
     
-    static func == (lhs: MonitoringState, rhs: MonitoringState) -> Bool {
+    static func == (lhs: ServiceMonitoringState, rhs: ServiceMonitoringState) -> Bool {
         switch (lhs, rhs) {
         case (.idle, .idle), (.active, .active), 
              (.permissionDenied, .permissionDenied),
              (.cameraUnavailable, .cameraUnavailable):
             return true
         case (.paused(let a), .paused(let b)):
-            return a == b
+            return a.rawValue == b.rawValue
         default:
             return false
         }

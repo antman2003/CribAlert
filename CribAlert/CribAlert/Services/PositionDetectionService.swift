@@ -38,33 +38,44 @@ class PositionDetectionService: ObservableObject {
     
     // MARK: - Lifecycle
     
+    /// Flag to track initialization state
+    private var isInitialized: Bool = false
+    
     func start() {
+        guard !isRunning else { return }
         isRunning = true
         
         // Check for custom models from MLModelManager
-        Task { @MainActor in
+        Task { @MainActor [weak self] in
+            guard let self = self, self.isRunning else { return }
+            
             let modelManager = MLModelManager.shared
             
             if modelManager.positionModelAvailable, let model = modelManager.positionModel {
-                customModel = model
-                usingCustomModel = true
+                self.customModel = model
+                self.usingCustomModel = true
                 print("📱 PositionDetectionService: Using custom BabyPositionClassifier model")
             } else {
-                setupVisionFallback()
-                usingCustomModel = false
+                self.setupVisionFallback()
+                self.usingCustomModel = false
                 print("📱 PositionDetectionService: Using Vision framework fallback")
             }
             
             // Also check for face coverage model
             if modelManager.faceCoverageModelAvailable {
-                customFaceCoverageModel = modelManager.faceCoverageModel
+                self.customFaceCoverageModel = modelManager.faceCoverageModel
             }
+            
+            self.isInitialized = true
         }
     }
     
     func stop() {
         isRunning = false
+        isInitialized = false
         poseRequest = nil
+        customModel = nil
+        customFaceCoverageModel = nil
     }
     
     // MARK: - Setup
