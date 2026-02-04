@@ -51,37 +51,27 @@ struct OnboardingFlow: View {
                     })
                     
                 case .babyName:
-                    // Placeholder - will be implemented in Step 3.1
-                    SetupPlaceholderView(
-                        step: 1,
-                        title: "What do you call your baby?",
+                    BabyNameSetupView(
                         onContinue: { currentStep = .cameraPlacement },
                         onBack: { currentStep = .welcome }
                     )
                     
                 case .cameraPlacement:
-                    // Placeholder - will be implemented in Step 3.2
-                    SetupPlaceholderView(
-                        step: 2,
-                        title: "Mount your device",
+                    CameraPlacementView(
                         onContinue: { currentStep = .defineSleepArea },
-                        onBack: { currentStep = .babyName }
+                        onBack: { currentStep = .babyName },
+                        onSkip: { currentStep = .defineSleepArea }
                     )
                     
                 case .defineSleepArea:
-                    // Placeholder - will be implemented in Step 3.3
-                    SetupPlaceholderView(
-                        step: 3,
-                        title: "Define the sleep area",
+                    DefineSleepAreaView(
                         onContinue: { currentStep = .finalCheck },
-                        onBack: { currentStep = .cameraPlacement }
+                        onBack: { currentStep = .cameraPlacement },
+                        onSkip: { currentStep = .finalCheck }
                     )
                     
                 case .finalCheck:
-                    // Placeholder - will be implemented in Step 3.4
-                    SetupPlaceholderView(
-                        step: 4,
-                        title: "Final setup check",
+                    FinalSetupCheckView(
                         onContinue: {
                             appState.completeSetup()
                         },

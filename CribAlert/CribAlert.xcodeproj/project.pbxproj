@@ -19,6 +19,10 @@
 		8A1B2C3D4E5F6A8D /* ToggleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6A8E /* ToggleRow.swift */; };
 		8A1B2C3D4E5F6A8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6A90 /* Assets.xcassets */; };
 		8A1B2C3D4E5F6AB0 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AB1 /* WelcomeView.swift */; };
+		8A1B2C3D4E5F6AC0 /* BabyNameSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AC1 /* BabyNameSetupView.swift */; };
+		8A1B2C3D4E5F6AC2 /* CameraPlacementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AC3 /* CameraPlacementView.swift */; };
+		8A1B2C3D4E5F6AC4 /* DefineSleepAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AC5 /* DefineSleepAreaView.swift */; };
+		8A1B2C3D4E5F6AC6 /* FinalSetupCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AC7 /* FinalSetupCheckView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		8A1B2C3D4E5F6A90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6A92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AB1 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AC1 /* BabyNameSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameSetupView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AC3 /* CameraPlacementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPlacementView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AC5 /* DefineSleepAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineSleepAreaView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AC7 /* FinalSetupCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalSetupCheckView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +123,20 @@
 			isa = PBXGroup;
 			children = (
 				8A1B2C3D4E5F6AB2 /* Welcome */,
+				8A1B2C3D4E5F6AC8 /* Setup */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		8A1B2C3D4E5F6AC8 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				8A1B2C3D4E5F6AC1 /* BabyNameSetupView.swift */,
+				8A1B2C3D4E5F6AC3 /* CameraPlacementView.swift */,
+				8A1B2C3D4E5F6AC5 /* DefineSleepAreaView.swift */,
+				8A1B2C3D4E5F6AC7 /* FinalSetupCheckView.swift */,
+			);
+			path = Setup;
 			sourceTree = "<group>";
 		};
 		8A1B2C3D4E5F6AB2 /* Welcome */ = {
@@ -229,6 +249,10 @@
 				8A1B2C3D4E5F6A8B /* StatusCard.swift in Sources */,
 				8A1B2C3D4E5F6A8D /* ToggleRow.swift in Sources */,
 				8A1B2C3D4E5F6AB0 /* WelcomeView.swift in Sources */,
+				8A1B2C3D4E5F6AC0 /* BabyNameSetupView.swift in Sources */,
+				8A1B2C3D4E5F6AC2 /* CameraPlacementView.swift in Sources */,
+				8A1B2C3D4E5F6AC4 /* DefineSleepAreaView.swift in Sources */,
+				8A1B2C3D4E5F6AC6 /* FinalSetupCheckView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
