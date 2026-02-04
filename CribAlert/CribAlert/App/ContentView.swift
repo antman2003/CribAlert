@@ -103,7 +103,7 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             // Monitor Tab
-            MonitorPlaceholderView()
+            MonitorView()
                 .tabItem {
                     Label("Monitor", systemImage: "video.fill")
                 }
