@@ -110,14 +110,14 @@ struct MainTabView: View {
                 .tag(MainTab.monitor)
             
             // History Tab
-            HistoryPlaceholderView()
+            HistoryView()
                 .tabItem {
                     Label("History", systemImage: "chart.bar.fill")
                 }
                 .tag(MainTab.history)
             
             // Settings Tab
-            SettingsPlaceholderView()
+            SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape.fill")
                 }

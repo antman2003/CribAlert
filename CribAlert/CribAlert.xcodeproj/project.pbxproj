@@ -27,6 +27,13 @@
 		8A1B2C3D4E5F6AD3 /* MonitorPausedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AD4 /* MonitorPausedView.swift */; };
 		8A1B2C3D4E5F6AE0 /* SafetyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AE1 /* SafetyAlertView.swift */; };
 		8A1B2C3D4E5F6AE2 /* AlertTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AE3 /* AlertTypes.swift */; };
+		8A1B2C3D4E5F6AF0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AF1 /* HistoryView.swift */; };
+		8A1B2C3D4E5F6AF2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AF3 /* SettingsView.swift */; };
+		8A1B2C3D4E5F6AF4 /* AlertPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AF5 /* AlertPreferencesView.swift */; };
+		8A1B2C3D4E5F6AF6 /* BabyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AF7 /* BabyProfileView.swift */; };
+		8A1B2C3D4E5F6AF8 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AF9 /* PrivacyView.swift */; };
+		8A1B2C3D4E5F6AFA /* HelpSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AFB /* HelpSupportView.swift */; };
+		8A1B2C3D4E5F6AFC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AFD /* AccountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +59,13 @@
 		8A1B2C3D4E5F6AD4 /* MonitorPausedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorPausedView.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AE1 /* SafetyAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyAlertView.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AE3 /* AlertTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTypes.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AF1 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AF3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AF5 /* AlertPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPreferencesView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AF7 /* BabyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyProfileView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AF9 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AFB /* HelpSupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSupportView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AFD /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +148,8 @@
 				8A1B2C3D4E5F6AC8 /* Setup */,
 				8A1B2C3D4E5F6AD2 /* Monitor */,
 				8A1B2C3D4E5F6AE4 /* Alerts */,
+				8A1B2C3D4E5F6AFE /* History */,
+				8A1B2C3D4E5F6AFF /* Settings */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -144,6 +160,27 @@
 				8A1B2C3D4E5F6AE1 /* SafetyAlertView.swift */,
 			);
 			path = Alerts;
+			sourceTree = "<group>";
+		};
+		8A1B2C3D4E5F6AFE /* History */ = {
+			isa = PBXGroup;
+			children = (
+				8A1B2C3D4E5F6AF1 /* HistoryView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		8A1B2C3D4E5F6AFF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8A1B2C3D4E5F6AF3 /* SettingsView.swift */,
+				8A1B2C3D4E5F6AF5 /* AlertPreferencesView.swift */,
+				8A1B2C3D4E5F6AF7 /* BabyProfileView.swift */,
+				8A1B2C3D4E5F6AF9 /* PrivacyView.swift */,
+				8A1B2C3D4E5F6AFB /* HelpSupportView.swift */,
+				8A1B2C3D4E5F6AFD /* AccountView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		8A1B2C3D4E5F6AD2 /* Monitor */ = {
@@ -285,6 +322,13 @@
 				8A1B2C3D4E5F6AD3 /* MonitorPausedView.swift in Sources */,
 				8A1B2C3D4E5F6AE0 /* SafetyAlertView.swift in Sources */,
 				8A1B2C3D4E5F6AE2 /* AlertTypes.swift in Sources */,
+				8A1B2C3D4E5F6AF0 /* HistoryView.swift in Sources */,
+				8A1B2C3D4E5F6AF2 /* SettingsView.swift in Sources */,
+				8A1B2C3D4E5F6AF4 /* AlertPreferencesView.swift in Sources */,
+				8A1B2C3D4E5F6AF6 /* BabyProfileView.swift in Sources */,
+				8A1B2C3D4E5F6AF8 /* PrivacyView.swift in Sources */,
+				8A1B2C3D4E5F6AFA /* HelpSupportView.swift in Sources */,
+				8A1B2C3D4E5F6AFC /* AccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
