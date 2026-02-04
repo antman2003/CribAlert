@@ -5,10 +5,14 @@
 //  On-device position detection using Core ML / Vision.
 //  Detects: on back, on side, on stomach, face coverage.
 //
+//  Uses custom BabyPositionClassifier.mlmodel if available,
+//  otherwise falls back to Vision framework body pose detection.
+//
 
 import Foundation
 import CoreImage
 import Vision
+import CoreML
 
 // MARK: - Position Detection Service
 
@@ -18,16 +22,44 @@ class PositionDetectionService: ObservableObject {
     
     @Published var isRunning: Bool = false
     @Published var latestResult: PositionDetectionResult?
+    @Published var usingCustomModel: Bool = false
     
-    // MARK: - Vision Components
+    // MARK: - Detection Components
     
+    /// Custom Core ML model (if available)
+    private var customModel: VNCoreMLModel?
+    private var customFaceCoverageModel: VNCoreMLModel?
+    
+    /// Fallback Vision request
     private var poseRequest: VNDetectHumanBodyPoseRequest?
+    
+    /// CIContext for image processing
+    private let ciContext = CIContext()
     
     // MARK: - Lifecycle
     
     func start() {
         isRunning = true
-        setupVisionRequests()
+        
+        // Check for custom models from MLModelManager
+        Task { @MainActor in
+            let modelManager = MLModelManager.shared
+            
+            if modelManager.positionModelAvailable, let model = modelManager.positionModel {
+                customModel = model
+                usingCustomModel = true
+                print("📱 PositionDetectionService: Using custom BabyPositionClassifier model")
+            } else {
+                setupVisionFallback()
+                usingCustomModel = false
+                print("📱 PositionDetectionService: Using Vision framework fallback")
+            }
+            
+            // Also check for face coverage model
+            if modelManager.faceCoverageModelAvailable {
+                customFaceCoverageModel = modelManager.faceCoverageModel
+            }
+        }
     }
     
     func stop() {
@@ -37,8 +69,8 @@ class PositionDetectionService: ObservableObject {
     
     // MARK: - Setup
     
-    private func setupVisionRequests() {
-        // Use Vision framework for pose detection
+    private func setupVisionFallback() {
+        // Use Vision framework for pose detection as fallback
         poseRequest = VNDetectHumanBodyPoseRequest { [weak self] request, error in
             guard error == nil else { return }
             self?.processPoseObservations(request.results as? [VNHumanBodyPoseObservation])
@@ -48,7 +80,108 @@ class PositionDetectionService: ObservableObject {
     // MARK: - Detection
     
     func detectPosition(in frame: CIImage) -> PositionDetectionResult {
-        guard isRunning, let request = poseRequest else {
+        guard isRunning else {
+            return PositionDetectionResult(position: .unknown, confidence: 0, faceMayCovered: false)
+        }
+        
+        // Use custom model if available
+        if let model = customModel {
+            return detectWithCustomModel(frame, model: model)
+        } else {
+            return detectWithVisionFallback(frame)
+        }
+    }
+    
+    // MARK: - Custom Model Detection
+    
+    private func detectWithCustomModel(_ frame: CIImage, model: VNCoreMLModel) -> PositionDetectionResult {
+        var position: PositionStatus = .unknown
+        var confidence: Float = 0
+        var faceMayCovered = false
+        
+        // Create request for position classification
+        let request = VNCoreMLRequest(model: model) { request, error in
+            guard error == nil,
+                  let results = request.results as? [VNClassificationObservation],
+                  let topResult = results.first else {
+                return
+            }
+            
+            // Map model output to PositionStatus
+            position = self.mapClassificationToPosition(topResult.identifier)
+            confidence = topResult.confidence
+        }
+        
+        // Configure request
+        request.imageCropAndScaleOption = .centerCrop
+        
+        // Perform detection
+        let handler = VNImageRequestHandler(ciImage: frame, options: [:])
+        do {
+            try handler.perform([request])
+        } catch {
+            print("Custom model detection failed: \(error)")
+            return detectWithVisionFallback(frame)
+        }
+        
+        // Check face coverage with custom model if available
+        if let faceCoverageModel = customFaceCoverageModel {
+            faceMayCovered = detectFaceCoverageWithModel(frame, model: faceCoverageModel)
+        }
+        
+        let result = PositionDetectionResult(
+            position: position,
+            confidence: confidence,
+            faceMayCovered: faceMayCovered
+        )
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.latestResult = result
+        }
+        
+        return result
+    }
+    
+    private func mapClassificationToPosition(_ classification: String) -> PositionStatus {
+        switch classification.lowercased() {
+        case "on_back", "onback", "back":
+            return .onBack
+        case "on_side", "onside", "side":
+            return .onSide
+        case "on_stomach", "onstomach", "stomach", "prone":
+            return .onStomach
+        default:
+            return .unknown
+        }
+    }
+    
+    private func detectFaceCoverageWithModel(_ frame: CIImage, model: VNCoreMLModel) -> Bool {
+        var isCovered = false
+        
+        let request = VNCoreMLRequest(model: model) { request, error in
+            guard error == nil,
+                  let results = request.results as? [VNClassificationObservation],
+                  let topResult = results.first else {
+                return
+            }
+            
+            // Check if classified as covered
+            let classification = topResult.identifier.lowercased()
+            isCovered = classification.contains("covered") && topResult.confidence > 0.7
+        }
+        
+        request.imageCropAndScaleOption = .centerCrop
+        
+        let handler = VNImageRequestHandler(ciImage: frame, options: [:])
+        try? handler.perform([request])
+        
+        return isCovered
+    }
+    
+    // MARK: - Vision Fallback Detection
+    
+    private func detectWithVisionFallback(_ frame: CIImage) -> PositionDetectionResult {
+        guard let request = poseRequest else {
             return PositionDetectionResult(position: .unknown, confidence: 0, faceMayCovered: false)
         }
         
@@ -57,7 +190,7 @@ class PositionDetectionService: ObservableObject {
         do {
             try handler.perform([request])
         } catch {
-            print("Position detection failed: \(error)")
+            print("Vision fallback detection failed: \(error)")
         }
         
         return latestResult ?? PositionDetectionResult(position: .unknown, confidence: 0, faceMayCovered: false)
@@ -100,9 +233,6 @@ class PositionDetectionService: ObservableObject {
         let shoulderDiff = abs(leftShoulder.y - rightShoulder.y)
         let shoulderDistance = abs(leftShoulder.x - rightShoulder.x)
         
-        // If shoulders are at similar y-level and far apart in x -> on back
-        // If shoulders are close in x -> on side or stomach
-        
         let position: PositionStatus
         let confidence: Float
         
@@ -140,4 +270,9 @@ struct PositionDetectionResult {
     let position: PositionStatus
     let confidence: Float
     let faceMayCovered: Bool
+    
+    /// Human-readable description for debugging
+    var description: String {
+        "Position: \(position.displayValue), Confidence: \(Int(confidence * 100))%, Face Covered: \(faceMayCovered)"
+    }
 }

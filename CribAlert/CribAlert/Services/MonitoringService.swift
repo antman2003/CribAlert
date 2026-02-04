@@ -5,6 +5,11 @@
 //  Main monitoring service that coordinates camera, detection, and alerts.
 //  All analysis runs on-device - no video/audio is uploaded.
 //
+//  ML Model Support:
+//  - Automatically loads custom .mlmodel files if present
+//  - Falls back to Vision/Audio analysis if no custom models
+//  - See MLModelManager.swift for supported model specifications
+//
 
 import Foundation
 import AVFoundation
@@ -23,12 +28,16 @@ class MonitoringService: ObservableObject {
     @Published var currentMovement: MovementStatus = .still
     @Published var lastAlertType: AlertType?
     
+    /// Indicates if custom ML models are being used
+    @Published var usingCustomModels: Bool = false
+    
     // MARK: - Dependencies
     
     private let cameraService: CameraService
     private let positionDetector: PositionDetectionService
     private let movementDetector: MovementDetectionService
     private let cryingDetector: CryingDetectionService
+    private let modelManager = MLModelManager.shared
     
     // MARK: - Private State
     
@@ -82,6 +91,9 @@ class MonitoringService: ObservableObject {
         
         isMonitoring = true
         monitoringState = .active
+        
+        // Update custom model status
+        updateCustomModelStatus()
         
         // Start periodic analysis
         startAnalysisLoop()
@@ -183,6 +195,44 @@ class MonitoringService: ObservableObject {
     
     func dismissAlert() {
         lastAlertType = nil
+    }
+    
+    // MARK: - Model Status
+    
+    private func updateCustomModelStatus() {
+        // Check if any custom models are loaded
+        usingCustomModels = modelManager.positionModelAvailable || 
+                           modelManager.cryingModelAvailable ||
+                           modelManager.faceCoverageModelAvailable
+        
+        if usingCustomModels {
+            print("🤖 MonitoringService: Using custom ML models for enhanced detection")
+        } else {
+            print("🤖 MonitoringService: Using built-in Vision/Audio frameworks")
+        }
+    }
+    
+    /// Returns the current detection capabilities
+    var detectionCapabilities: DetectionCapabilities {
+        DetectionCapabilities(
+            positionDetection: modelManager.positionModelAvailable ? .customModel : .visionFramework,
+            cryingDetection: modelManager.cryingModelAvailable ? .customModel : .audioAnalysis,
+            faceCoverageDetection: modelManager.faceCoverageModelAvailable ? .customModel : .visionFramework
+        )
+    }
+}
+
+// MARK: - Detection Capabilities
+
+struct DetectionCapabilities {
+    let positionDetection: DetectionMethod
+    let cryingDetection: DetectionMethod
+    let faceCoverageDetection: DetectionMethod
+    
+    enum DetectionMethod: String {
+        case customModel = "Custom ML Model"
+        case visionFramework = "Vision Framework"
+        case audioAnalysis = "Audio Analysis"
     }
 }
 

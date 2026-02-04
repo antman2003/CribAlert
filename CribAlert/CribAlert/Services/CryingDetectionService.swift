@@ -5,29 +5,41 @@
 //  On-device crying detection using audio analysis.
 //  Audio is analyzed in real-time and never recorded.
 //
+//  Uses custom BabyCryingClassifier.mlmodel if available,
+//  otherwise falls back to audio level + pattern analysis.
+//
 
 import Foundation
 import AVFoundation
 import Accelerate
+import CoreML
+import SoundAnalysis
 
 // MARK: - Crying Detection Service
 
-class CryingDetectionService: ObservableObject {
+class CryingDetectionService: NSObject, ObservableObject {
     
     // MARK: - Published State
     
     @Published var isRunning: Bool = false
     @Published var latestResult: CryingDetectionResult?
     @Published var currentAudioLevel: Float = 0
+    @Published var usingCustomModel: Bool = false
     
     // MARK: - Audio Components
     
     private var audioEngine: AVAudioEngine?
     private var inputNode: AVAudioInputNode?
     
+    // MARK: - Sound Analysis (for custom model)
+    
+    private var soundAnalyzer: SNAudioStreamAnalyzer?
+    private var customModelRequest: SNClassifySoundRequest?
+    private let analysisQueue = DispatchQueue(label: "com.cribalert.soundanalysis")
+    
     // MARK: - Detection State
     
-    /// Threshold for considering audio as potential crying
+    /// Threshold for considering audio as potential crying (fallback mode)
     private let volumeThreshold: Float = 0.3
     
     /// Duration in seconds of sustained high audio before alerting
@@ -41,7 +53,88 @@ class CryingDetectionService: ObservableObject {
     func start() {
         guard !isRunning else { return }
         
-        setupAudioEngine()
+        // Check for custom model
+        Task { @MainActor in
+            let modelManager = MLModelManager.shared
+            
+            if modelManager.cryingModelAvailable, let model = modelManager.cryingModel {
+                setupWithCustomModel(model)
+                usingCustomModel = true
+                print("🎤 CryingDetectionService: Using custom BabyCryingClassifier model")
+            } else {
+                setupWithFallback()
+                usingCustomModel = false
+                print("🎤 CryingDetectionService: Using audio analysis fallback")
+            }
+        }
+    }
+    
+    func stop() {
+        audioEngine?.stop()
+        audioEngine = nil
+        inputNode = nil
+        soundAnalyzer = nil
+        customModelRequest = nil
+        isRunning = false
+        highAudioStartTime = nil
+        recentAudioLevels = []
+    }
+    
+    // MARK: - Setup with Custom Model
+    
+    private func setupWithCustomModel(_ model: MLModel) {
+        do {
+            // Create sound classification request
+            customModelRequest = try SNClassifySoundRequest(mlModel: model)
+            
+            // Setup audio engine
+            audioEngine = AVAudioEngine()
+            inputNode = audioEngine?.inputNode
+            
+            guard let inputNode = inputNode else { return }
+            
+            let format = inputNode.outputFormat(forBus: 0)
+            
+            // Create sound analyzer
+            soundAnalyzer = SNAudioStreamAnalyzer(format: format)
+            
+            // Add the classification request
+            if let request = customModelRequest, let analyzer = soundAnalyzer {
+                try analyzer.add(request, withObserver: self)
+            }
+            
+            // Install tap for audio processing
+            inputNode.installTap(onBus: 0, bufferSize: 8192, format: format) { [weak self] buffer, time in
+                self?.analysisQueue.async {
+                    self?.soundAnalyzer?.analyze(buffer, atAudioFramePosition: time.sampleTime)
+                }
+                
+                // Also calculate audio level for UI
+                self?.calculateAudioLevel(buffer)
+            }
+            
+            try audioEngine?.start()
+            isRunning = true
+            
+        } catch {
+            print("Failed to setup custom model: \(error)")
+            setupWithFallback()
+        }
+    }
+    
+    // MARK: - Setup with Fallback
+    
+    private func setupWithFallback() {
+        audioEngine = AVAudioEngine()
+        inputNode = audioEngine?.inputNode
+        
+        guard let inputNode = inputNode else { return }
+        
+        let format = inputNode.outputFormat(forBus: 0)
+        
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { [weak self] buffer, _ in
+            self?.processAudioBufferFallback(buffer)
+        }
         
         do {
             try audioEngine?.start()
@@ -52,42 +145,34 @@ class CryingDetectionService: ObservableObject {
         }
     }
     
-    func stop() {
-        audioEngine?.stop()
-        audioEngine = nil
-        inputNode = nil
-        isRunning = false
-        highAudioStartTime = nil
-        recentAudioLevels = []
-    }
+    // MARK: - Audio Level Calculation
     
-    // MARK: - Audio Setup
-    
-    private func setupAudioEngine() {
-        audioEngine = AVAudioEngine()
-        inputNode = audioEngine?.inputNode
-        
-        guard let inputNode = inputNode else { return }
-        
-        let format = inputNode.outputFormat(forBus: 0)
-        
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { [weak self] buffer, _ in
-            self?.processAudioBuffer(buffer)
-        }
-    }
-    
-    // MARK: - Audio Processing
-    
-    private func processAudioBuffer(_ buffer: AVAudioPCMBuffer) {
+    private func calculateAudioLevel(_ buffer: AVAudioPCMBuffer) {
         guard let channelData = buffer.floatChannelData?[0] else { return }
         
         let frameCount = Int(buffer.frameLength)
         
-        // Calculate RMS (Root Mean Square) for audio level
         var rms: Float = 0
         vDSP_rmsqv(channelData, 1, &rms, vDSP_Length(frameCount))
         
-        // Normalize to 0-1 range
+        let normalizedLevel = min(1.0, rms * 10)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.currentAudioLevel = normalizedLevel
+        }
+    }
+    
+    // MARK: - Fallback Audio Processing
+    
+    private func processAudioBufferFallback(_ buffer: AVAudioPCMBuffer) {
+        guard let channelData = buffer.floatChannelData?[0] else { return }
+        
+        let frameCount = Int(buffer.frameLength)
+        
+        // Calculate RMS for audio level
+        var rms: Float = 0
+        vDSP_rmsqv(channelData, 1, &rms, vDSP_Length(frameCount))
+        
         let normalizedLevel = min(1.0, rms * 10)
         
         DispatchQueue.main.async { [weak self] in
@@ -101,28 +186,25 @@ class CryingDetectionService: ObservableObject {
         }
         
         // Analyze for crying pattern
-        analyzeCryingPattern(currentLevel: normalizedLevel)
+        analyzeCryingPatternFallback(currentLevel: normalizedLevel)
     }
     
-    private func analyzeCryingPattern(currentLevel: Float) {
-        // Check if audio level is above threshold
+    private func analyzeCryingPatternFallback(currentLevel: Float) {
         if currentLevel > volumeThreshold {
             if highAudioStartTime == nil {
                 highAudioStartTime = Date()
             }
             
-            // Check if sustained high audio
             let duration = Date().timeIntervalSince(highAudioStartTime ?? Date())
             
             if duration > sustainedDuration {
-                // Analyze frequency pattern (simplified)
-                // Real implementation would use ML model for crying classification
-                let isCrying = classifyAsCrying()
+                let isCrying = classifyAsCryingFallback()
                 
                 let result = CryingDetectionResult(
                     isCrying: isCrying,
-                    confidence: isCrying ? 0.85 : 0.3,
-                    audioLevel: currentLevel
+                    confidence: isCrying ? 0.70 : 0.30, // Lower confidence for fallback
+                    audioLevel: currentLevel,
+                    usingCustomModel: false
                 )
                 
                 DispatchQueue.main.async { [weak self] in
@@ -130,19 +212,21 @@ class CryingDetectionService: ObservableObject {
                 }
             }
         } else {
-            // Audio dropped below threshold
             if let startTime = highAudioStartTime {
                 let duration = Date().timeIntervalSince(startTime)
                 if duration < 1.0 {
-                    // Short burst - reset
                     highAudioStartTime = nil
                 }
             }
             
-            // If quiet for a while, clear crying state
             if currentLevel < 0.1 {
                 highAudioStartTime = nil
-                let result = CryingDetectionResult(isCrying: false, confidence: 0.9, audioLevel: currentLevel)
+                let result = CryingDetectionResult(
+                    isCrying: false,
+                    confidence: 0.9,
+                    audioLevel: currentLevel,
+                    usingCustomModel: false
+                )
                 DispatchQueue.main.async { [weak self] in
                     self?.latestResult = result
                 }
@@ -150,32 +234,56 @@ class CryingDetectionService: ObservableObject {
         }
     }
     
-    private func classifyAsCrying() -> Bool {
-        // Simplified crying classification
-        // Real implementation would:
-        // 1. Extract audio features (MFCCs, spectral features)
-        // 2. Use trained Core ML model for classification
-        // 3. Distinguish crying from other sounds (TV, music, talking)
-        
-        // For now, use simple heuristics:
-        // - Sustained high volume
-        // - Variable amplitude (crying has characteristic rhythm)
-        
+    private func classifyAsCryingFallback() -> Bool {
         guard recentAudioLevels.count > 20 else { return false }
         
         let recentLevels = Array(recentAudioLevels.suffix(20))
         
-        // Calculate variance
         let mean = recentLevels.reduce(0, +) / Float(recentLevels.count)
         let variance = recentLevels.map { pow($0 - mean, 2) }.reduce(0, +) / Float(recentLevels.count)
         
-        // Crying typically has moderate variance (not constant like white noise)
+        // Crying typically has moderate variance
         let hasVariance = variance > 0.01 && variance < 0.1
-        
-        // Check average level is high
         let highAverage = mean > volumeThreshold
         
         return hasVariance && highAverage
+    }
+}
+
+// MARK: - SNResultsObserving (Custom Model)
+
+extension CryingDetectionService: SNResultsObserving {
+    
+    func request(_ request: SNRequest, didProduce result: SNResult) {
+        guard let classificationResult = result as? SNClassificationResult else { return }
+        
+        // Get the top classification
+        guard let topClassification = classificationResult.classifications.first else { return }
+        
+        let identifier = topClassification.identifier.lowercased()
+        let confidence = Float(topClassification.confidence)
+        
+        // Check if classified as crying
+        let isCrying = identifier.contains("cry") && confidence > 0.6
+        
+        let detectionResult = CryingDetectionResult(
+            isCrying: isCrying,
+            confidence: confidence,
+            audioLevel: currentAudioLevel,
+            usingCustomModel: true
+        )
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.latestResult = detectionResult
+        }
+    }
+    
+    func request(_ request: SNRequest, didFailWithError error: Error) {
+        print("Sound classification failed: \(error)")
+    }
+    
+    func requestDidComplete(_ request: SNRequest) {
+        // Classification completed
     }
 }
 
@@ -185,4 +293,11 @@ struct CryingDetectionResult {
     let isCrying: Bool
     let confidence: Float
     let audioLevel: Float
+    let usingCustomModel: Bool
+    
+    /// Human-readable description for debugging
+    var description: String {
+        let modelType = usingCustomModel ? "Custom Model" : "Fallback"
+        return "Crying: \(isCrying), Confidence: \(Int(confidence * 100))%, Level: \(Int(audioLevel * 100))% [\(modelType)]"
+    }
 }
