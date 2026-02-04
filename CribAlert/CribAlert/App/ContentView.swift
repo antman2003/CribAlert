@@ -44,8 +44,8 @@ struct OnboardingFlow: View {
             Group {
                 switch currentStep {
                 case .welcome:
-                    // Placeholder - will be implemented in Step 2.1
-                    WelcomePlaceholderView(onContinue: {
+                    // Welcome screen with safety disclaimer
+                    WelcomeView(onContinue: {
                         appState.acceptDisclaimer()
                         currentStep = .babyName
                     })
