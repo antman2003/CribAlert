@@ -28,6 +28,7 @@
 		8A1B2C3D4E5F6AE0 /* SafetyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AE1 /* SafetyAlertView.swift */; };
 		8A1B2C3D4E5F6AE2 /* AlertTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AE3 /* AlertTypes.swift */; };
 		8A1B2C3D4E5F6B12 /* StatusTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6B13 /* StatusTypes.swift */; };
+		8A1B2C3D4E5F6B14 /* ActivityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6B15 /* ActivityModels.swift */; };
 		8A1B2C3D4E5F6AF0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AF1 /* HistoryView.swift */; };
 		8A1B2C3D4E5F6AF2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AF3 /* SettingsView.swift */; };
 		8A1B2C3D4E5F6AF4 /* AlertPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AF5 /* AlertPreferencesView.swift */; };
@@ -67,6 +68,7 @@
 		8A1B2C3D4E5F6AE1 /* SafetyAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyAlertView.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AE3 /* AlertTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTypes.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6B13 /* StatusTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTypes.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6B15 /* ActivityModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModels.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AF1 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AF3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AF5 /* AlertPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPreferencesView.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			children = (
 				8A1B2C3D4E5F6AE3 /* AlertTypes.swift */,
 				8A1B2C3D4E5F6B13 /* StatusTypes.swift */,
+				8A1B2C3D4E5F6B15 /* ActivityModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				8A1B2C3D4E5F6AE0 /* SafetyAlertView.swift in Sources */,
 				8A1B2C3D4E5F6AE2 /* AlertTypes.swift in Sources */,
 				8A1B2C3D4E5F6B12 /* StatusTypes.swift in Sources */,
+				8A1B2C3D4E5F6B14 /* ActivityModels.swift in Sources */,
 				8A1B2C3D4E5F6AF0 /* HistoryView.swift in Sources */,
 				8A1B2C3D4E5F6AF2 /* SettingsView.swift in Sources */,
 				8A1B2C3D4E5F6AF4 /* AlertPreferencesView.swift in Sources */,

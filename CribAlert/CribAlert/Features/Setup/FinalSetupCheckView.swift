@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FinalSetupCheckView: View {
     
@@ -17,9 +18,7 @@ struct FinalSetupCheckView: View {
     @State private var calibrationProgress: Double = 0.0
     @State private var isCalibrationComplete = false
     @State private var statusText = "Setting up..."
-    
-    // Timer for simulating calibration
-    let calibrationTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
+    @State private var timerCancellable: AnyCancellable?
     
     // MARK: - Body
     
@@ -67,14 +66,35 @@ struct FinalSetupCheckView: View {
         }
         .background(Color(red: 0.98, green: 0.99, blue: 0.97))
         .navigationBarHidden(true)
-        .onReceive(calibrationTimer) { _ in
-            if calibrationProgress < 1.0 {
-                calibrationProgress += 0.01
-                updateStatusText()
-            } else {
-                isCalibrationComplete = true
-            }
+        .onAppear {
+            startCalibrationTimer()
         }
+        .onDisappear {
+            stopCalibrationTimer()
+        }
+    }
+    
+    // MARK: - Timer Management
+    
+    private func startCalibrationTimer() {
+        guard timerCancellable == nil else { return }
+        
+        timerCancellable = Timer.publish(every: 0.05, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                if calibrationProgress < 1.0 {
+                    calibrationProgress += 0.01
+                    updateStatusText()
+                } else {
+                    isCalibrationComplete = true
+                    stopCalibrationTimer()
+                }
+            }
+    }
+    
+    private func stopCalibrationTimer() {
+        timerCancellable?.cancel()
+        timerCancellable = nil
     }
     
     // MARK: - Header
