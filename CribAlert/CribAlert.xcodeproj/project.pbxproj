@@ -25,6 +25,8 @@
 		8A1B2C3D4E5F6AC6 /* FinalSetupCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AC7 /* FinalSetupCheckView.swift */; };
 		8A1B2C3D4E5F6AD0 /* MonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AD1 /* MonitorView.swift */; };
 		8A1B2C3D4E5F6AD3 /* MonitorPausedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AD4 /* MonitorPausedView.swift */; };
+		8A1B2C3D4E5F6AE0 /* SafetyAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AE1 /* SafetyAlertView.swift */; };
+		8A1B2C3D4E5F6AE2 /* AlertTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AE3 /* AlertTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		8A1B2C3D4E5F6AC7 /* FinalSetupCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalSetupCheckView.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AD1 /* MonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorView.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AD4 /* MonitorPausedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorPausedView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AE1 /* SafetyAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyAlertView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6AE3 /* AlertTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +133,17 @@
 				8A1B2C3D4E5F6AB2 /* Welcome */,
 				8A1B2C3D4E5F6AC8 /* Setup */,
 				8A1B2C3D4E5F6AD2 /* Monitor */,
+				8A1B2C3D4E5F6AE4 /* Alerts */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		8A1B2C3D4E5F6AE4 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				8A1B2C3D4E5F6AE1 /* SafetyAlertView.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 		8A1B2C3D4E5F6AD2 /* Monitor */ = {
@@ -171,6 +184,7 @@
 		8A1B2C3D4E5F6A9B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8A1B2C3D4E5F6AE3 /* AlertTypes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +283,8 @@
 				8A1B2C3D4E5F6AC6 /* FinalSetupCheckView.swift in Sources */,
 				8A1B2C3D4E5F6AD0 /* MonitorView.swift in Sources */,
 				8A1B2C3D4E5F6AD3 /* MonitorPausedView.swift in Sources */,
+				8A1B2C3D4E5F6AE0 /* SafetyAlertView.swift in Sources */,
+				8A1B2C3D4E5F6AE2 /* AlertTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
