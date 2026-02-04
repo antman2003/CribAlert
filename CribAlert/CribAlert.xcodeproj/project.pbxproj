@@ -34,6 +34,11 @@
 		8A1B2C3D4E5F6AF8 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AF9 /* PrivacyView.swift */; };
 		8A1B2C3D4E5F6AFA /* HelpSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AFB /* HelpSupportView.swift */; };
 		8A1B2C3D4E5F6AFC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6AFD /* AccountView.swift */; };
+		8A1B2C3D4E5F6B00 /* MonitoringService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6B01 /* MonitoringService.swift */; };
+		8A1B2C3D4E5F6B02 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6B03 /* CameraService.swift */; };
+		8A1B2C3D4E5F6B04 /* PositionDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6B05 /* PositionDetectionService.swift */; };
+		8A1B2C3D4E5F6B06 /* MovementDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6B07 /* MovementDetectionService.swift */; };
+		8A1B2C3D4E5F6B08 /* CryingDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B2C3D4E5F6B09 /* CryingDetectionService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +71,11 @@
 		8A1B2C3D4E5F6AF9 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AFB /* HelpSupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSupportView.swift; sourceTree = "<group>"; };
 		8A1B2C3D4E5F6AFD /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6B01 /* MonitoringService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoringService.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6B03 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6B05 /* PositionDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionDetectionService.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6B07 /* MovementDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementDetectionService.swift; sourceTree = "<group>"; };
+		8A1B2C3D4E5F6B09 /* CryingDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryingDetectionService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +224,11 @@
 		8A1B2C3D4E5F6A9A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8A1B2C3D4E5F6B01 /* MonitoringService.swift */,
+				8A1B2C3D4E5F6B03 /* CameraService.swift */,
+				8A1B2C3D4E5F6B05 /* PositionDetectionService.swift */,
+				8A1B2C3D4E5F6B07 /* MovementDetectionService.swift */,
+				8A1B2C3D4E5F6B09 /* CryingDetectionService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -329,6 +344,11 @@
 				8A1B2C3D4E5F6AF8 /* PrivacyView.swift in Sources */,
 				8A1B2C3D4E5F6AFA /* HelpSupportView.swift in Sources */,
 				8A1B2C3D4E5F6AFC /* AccountView.swift in Sources */,
+				8A1B2C3D4E5F6B00 /* MonitoringService.swift in Sources */,
+				8A1B2C3D4E5F6B02 /* CameraService.swift in Sources */,
+				8A1B2C3D4E5F6B04 /* PositionDetectionService.swift in Sources */,
+				8A1B2C3D4E5F6B06 /* MovementDetectionService.swift in Sources */,
+				8A1B2C3D4E5F6B08 /* CryingDetectionService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
